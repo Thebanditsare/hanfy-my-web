@@ -199,40 +199,6 @@ h2 {
     text-align: center;
 }
 
-.donate-table-wrap {
-    overflow-x: auto;
-    margin-bottom: 24px;
-    background: rgba(255, 255, 255, 0.5);
-    border-radius: 16px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-}
-
-.donate-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 520px;
-}
-
-.donate-table th,
-.donate-table td {
-    padding: 14px 16px;
-    text-align: left;
-    border-bottom: 1px solid rgba(57, 197, 187, 0.15);
-}
-
-.donate-table th {
-    color: #2d3748;
-    font-weight: 700;
-}
-
-.donate-table td {
-    color: #4a5568;
-}
-
-.donate-table tr:last-child td {
-    border-bottom: none;
-}
-
 .price-card {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 16px;
@@ -269,16 +235,6 @@ h2 {
     color: #2d3748;
     margin: 0;
     font-weight: 700;
-}
-
-.price-tag {
-    background: linear-gradient(135deg, #39C5BB 0%, #2EC4B6 100%);
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: 50px;
-    font-weight: 600;
-    font-size: 1rem;
-    box-shadow: 0 4px 10px rgba(57, 197, 187, 0.3);
 }
 
 .price-desc {
