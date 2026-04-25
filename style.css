@@ -135,11 +135,90 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
+.coolapk-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.coolapk-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.45);
+    padding: 16px 20px;
+    border-radius: 14px;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease;
+}
+
+.coolapk-card:hover {
+    background: rgba(255, 255, 255, 0.65);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(57, 197, 187, 0.15);
+}
+
+.coolapk-card img {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.coolapk-card span {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.coolapk-card strong {
+    color: #2d3748;
+}
+
+.coolapk-card small {
+    color: #718096;
+}
+
 .group-intro {
     color: #4a5568;
     margin-bottom: 32px;
     font-size: 1.05rem;
     text-align: center;
+}
+
+.donate-table-wrap {
+    overflow-x: auto;
+    margin-bottom: 24px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.donate-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 520px;
+}
+
+.donate-table th,
+.donate-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid rgba(57, 197, 187, 0.15);
+}
+
+.donate-table th {
+    color: #2d3748;
+    font-weight: 700;
+}
+
+.donate-table td {
+    color: #4a5568;
+}
+
+.donate-table tr:last-child td {
+    border-bottom: none;
 }
 
 .price-card {
