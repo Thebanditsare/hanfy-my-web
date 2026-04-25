@@ -115,6 +115,18 @@ h2 {
     font-weight: 600;
 }
 
+.platform-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.platform-title img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
 .about p {
     color: #4a5568;
     margin-bottom: 20px;
