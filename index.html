@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>悍匪 — ROM 玩家的小窝</title>
+    <meta name="description" content="一个折腾 ROM 的普通人。澎湃官改移植 / 刷机 / Magisk / 搞机交流。">
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+    <!-- Fonts: 等宽(工程) + 无衬线(标题) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Noto+Sans+SC:wght@300;400;500;700;900&family=Noto+Serif+SC:wght@600;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=20260725-1">
+</head>
+<body data-theme="light">
+
+    <!-- ═══════════ 启动引导层 BOOT ═══════════ -->
+    <div class="boot" id="boot" aria-hidden="true">
+        <div class="boot-inner">
+            <div class="boot-log" id="boot-log"></div>
+            <div class="boot-bar"><span class="boot-bar-fill" id="boot-bar-fill"></span></div>
+            <div class="boot-pct" id="boot-pct">0%</div>
+        </div>
+    </div>
+
+    <!-- ═══════════ 全局装饰层 ═══════════ -->
+    <canvas class="fx-canvas" id="fx-canvas" aria-hidden="true"></canvas>
+    <div class="fx-grid" aria-hidden="true"></div>
+    <div class="fx-noise" aria-hidden="true"></div>
+    <div class="fx-scanline" aria-hidden="true"></div>
+
+    <!-- 自定义光标 -->
+    <div class="cursor" id="cursor" aria-hidden="true">
+        <div class="cursor-dot" id="cursor-dot"></div>
+        <div class="cursor-ring" id="cursor-ring"></div>
+    </div>
+
+    <!-- 滚动进度 -->
+    <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-fill"></span></div>
+
+    <!-- ═══════════ 顶部导航 ═══════════ -->
+    <header class="site-nav" id="site-nav">
+        <a class="nav-brand" href="#top" data-cursor="hover">
+            <span class="nav-sigil">&gt;_</span>
+            <span class="nav-name">HANFY<span class="nav-dot">.</span>ASIA</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+            <a href="#about" data-cursor="hover"><span class="nav-idx">01</span>关于</a>
+            <a href="#nodes" data-cursor="hover"><span class="nav-idx">02</span>据点</a>
+            <a href="#flash" data-cursor="hover"><span class="nav-idx">03</span>上车</a>
+            <a href="#faq" data-cursor="hover"><span class="nav-idx">04</span>问答</a>
+        </nav>
+        <a class="nav-cta" href="#flash" data-cursor="hover">
+            <i data-lucide="terminal" class="ic"></i>
+            <span>进入终端</span>
+        </a>
+    </header>
+
+    <main id="top">
+
+        <!-- ═══════════ 01 · HERO / UNLOCK ═══════════ -->
+        <section class="hero" id="hero">
+            <div class="hero-meta hero-meta--tl reveal">
+                <span>SYS.BOOTLOADER</span>
+                <span class="ok">UNLOCKED</span>
+            </div>
+            <div class="hero-meta hero-meta--tr reveal">
+                <span>v2026.07</span>
+                <span>EST.2022</span>
+            </div>
+
+            <div class="hero-core">
+                <p class="hero-eyebrow reveal">
+                    <span class="tick"></span>嗨,这里是悍匪 — 一个折腾 ROM 的普通人
+                </p>
+
+                <h1 class="hero-title" aria-label="解构。重写。重生。">
+                    <span class="ht-line"><span class="ht-word" data-split>解构</span><span class="ht-punct">,</span></span>
+                    <span class="ht-line"><span class="ht-word ht-word--stroke" data-split>重写</span><span class="ht-punct">,</span></span>
+                    <span class="ht-line"><span class="ht-word" data-split>重生</span><span class="ht-punct ht-punct--accent">。</span></span>
+                </h1>
+
+                <p class="hero-lede reveal">
+                    刷机这事儿,说白了就是不甘心 —— 不甘心用厂商替你安排好的系统。
+                    Bootloader 解开的那一下,这台机器才算真正到了你手里。
+                </p>
+
+                <div class="hero-actions reveal">
+                    <a class="btn btn--solid" href="#flash" data-cursor="hover" data-magnetic>
+                        <i data-lucide="zap" class="ic"></i>
+                        <span>查看适配机型</span>
+                    </a>
+                    <a class="btn btn--ghost" href="#about" data-cursor="hover" data-magnetic>
+                        <i data-lucide="fingerprint" class="ic"></i>
+                        <span>认识一下</span>
+                    </a>
+                </div>
+            </div>
+
+            <a class="hero-scrollcue" href="#about" data-cursor="hover" aria-label="向下滚动">
+                <span class="hsc-label">SCROLL</span>
+                <span class="hsc-line"><span class="hsc-dot"></span></span>
+            </a>
+
+            <div class="hero-avatar reveal" data-cursor="hover" title="QQ: 2727901961">
+                <img src="https://q1.qlogo.cn/g?b=qq&nk=2727901961&s=640" alt="悍匪的 QQ 头像" loading="lazy" onerror="this.closest('.hero-avatar').classList.add('no-img')">
+                <span class="hero-avatar-ring"></span>
+            </div>
+        </section>
+
+        <!-- ═══════════ 跑马灯分隔带 ═══════════ -->
+        <div class="marquee" aria-hidden="true">
+            <div class="marquee-track">
+                <span>MAGISK</span><i data-lucide="cpu" class="mq-ic"></i>
+                <span>HYPEROS</span><i data-lucide="layers" class="mq-ic"></i>
+                <span>BOOTLOADER</span><i data-lucide="lock-open" class="mq-ic"></i>
+                <span>RECOVERY</span><i data-lucide="refresh-ccw" class="mq-ic"></i>
+                <span>ROOT</span><i data-lucide="terminal" class="mq-ic"></i>
+                <span>FASTBOOT</span><i data-lucide="zap" class="mq-ic"></i>
+                <span>MAGISK</span><i data-lucide="cpu" class="mq-ic"></i>
+                <span>HYPEROS</span><i data-lucide="layers" class="mq-ic"></i>
+                <span>BOOTLOADER</span><i data-lucide="lock-open" class="mq-ic"></i>
+                <span>RECOVERY</span><i data-lucide="refresh-ccw" class="mq-ic"></i>
+                <span>ROOT</span><i data-lucide="terminal" class="mq-ic"></i>
+                <span>FASTBOOT</span><i data-lucide="zap" class="mq-ic"></i>
+            </div>
+        </div>
+
+        <!-- ═══════════ 02 · ABOUT / MANIFESTO ═══════════ -->
+        <section class="about" id="about">
+            <div class="sec-head reveal">
+                <span class="sec-num">01</span>
+                <span class="sec-tag">ABOUT — 我是谁</span>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-statement reveal">
+                    <p>
+                        玩机这些年,踩过的坑比刷过的包还多。<br>
+                        谈不上什么大神,就是个<span class="hl">闲不住</span>的人 ——
+                        看官方固件不顺眼就拆开,删掉臃肿,补上缺的功能,
+                        再一针一线缝回去。
+                    </p>
+                    <p class="about-sub">
+                        一直认一个理:花钱买来的设备,凭什么不能自己做主?认这个理的,都是自己人。
+                    </p>
+                </div>
+
+                <ul class="about-specs reveal">
+                    <li><i data-lucide="smartphone" class="ic"></i><div><b>主攻方向</b><span>澎湃官改 · 官改移植</span></div></li>
+                    <li><i data-lucide="wrench" class="ic"></i><div><b>手艺</b><span>拆包 / 合并 / 适配 / 精简</span></div></li>
+                    <li><i data-lucide="shield" class="ic"></i><div><b>玩机信条</b><span>稳住不砖,砖了能救</span></div></li>
+                    <li><i data-lucide="message-circle" class="ic"></i><div><b>联系方式</b><span>QQ 2727901961</span></div></li>
+                </ul>
+            </div>
+
+            <div class="about-tags reveal">
+                <span class="chip"><i data-lucide="bot" class="ic"></i>Android</span>
+                <span class="chip"><i data-lucide="hammer" class="ic"></i>刷机</span>
+                <span class="chip"><i data-lucide="package" class="ic"></i>ROM 定制</span>
+                <span class="chip"><i data-lucide="puzzle" class="ic"></i>Magisk</span>
+                <span class="chip"><i data-lucide="git-branch" class="ic"></i>官改移植</span>
+            </div>
+        </section>
+
+        <!-- ═══════════ 03 · NODES / 社交据点 ═══════════ -->
+        <section class="nodes" id="nodes">
+            <div class="sec-head reveal">
+                <span class="sec-num">02</span>
+                <span class="sec-tag">NODES — 网上据点</span>
+            </div>
+
+            <h2 class="sec-title reveal"><span data-split>在别处找到我</span></h2>
+
+            <div class="nodes-block reveal">
+                <div class="nodes-platform">
+                    <img class="nodes-logo" src="assets/coolapk-logo.png" alt="酷安 logo">
+                    <span class="nodes-pname">酷安 COOLAPK</span>
+                </div>
+                <a class="node-card" href="https://www.coolapk.com/u/22142068" target="_blank" rel="noreferrer" data-cursor="hover" data-magnetic>
+                    <img class="node-ava" src="assets/coolapk-22142068.jpg" alt="宫水三叶_Mitsuha 头像">
+                    <span class="node-info"><b>宫水三叶_Mitsuha</b><small>ID · 22142068</small></span>
+                    <i data-lucide="arrow-up-right" class="node-go"></i>
+                </a>
+                <a class="node-card" href="https://www.coolapk.com/u/32252373" target="_blank" rel="noreferrer" data-cursor="hover" data-magnetic>
+                    <img class="node-ava" src="assets/coolapk-32252373.jpg" alt="水月Tea 头像">
+                    <span class="node-info"><b>水月Tea</b><small>ID · 32252373</small></span>
+                    <i data-lucide="arrow-up-right" class="node-go"></i>
+                </a>
+            </div>
+
+            <div class="nodes-block reveal">
+                <div class="nodes-platform">
+                    <img class="nodes-logo" src="assets/bilibili-logo.ico" alt="B站 logo">
+                    <span class="nodes-pname">哔哩哔哩 BILIBILI</span>
+                </div>
+                <a class="node-card" href="https://space.bilibili.com/1654941948" target="_blank" rel="noreferrer" data-cursor="hover" data-magnetic>
+                    <img class="node-ava" src="assets/bilibili-1654941948.jpg" alt="CopraTim 头像">
+                    <span class="node-info"><b>CopraTim</b><small>UID · 1654941948</small></span>
+                    <i data-lucide="arrow-up-right" class="node-go"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- ═══════════ 04 · FLASH / 机型与上车 ═══════════ -->
+        <section class="flash" id="flash">
+            <div class="sec-head reveal">
+                <span class="sec-num">03</span>
+                <span class="sec-tag">FLASH — 捐赠上车</span>
+            </div>
+
+            <h2 class="sec-title reveal"><span data-split>官改 · 移植系列</span></h2>
+            <p class="sec-lede reveal">
+                是不是早就腻了厂商塞满广告、越用越卡的系统?
+                移植的意义就在这儿 —— 把别的机型上更好的体验,搬到你的设备上。
+                官改包基于官方精简,移植包取自小米 17 系列高端机型合并。
+                虚拟商品,捐赠上车,进群看详情。
+            </p>
+
+            <!-- 小米官改矩阵 -->
+            <div class="dev-matrix">
+                <article class="dev-group reveal" data-cursor="hover">
+                    <header class="dev-head"><i data-lucide="smartphone" class="ic"></i><h3>Xiaomi 数字系列</h3></header>
+                    <div class="dev-chips">
+                        <span>Xiaomi 11 全系</span><span>Xiaomi 12 全系</span><span>Xiaomi 13 全系</span>
+                        <span>Xiaomi 14 全系</span><span>Xiaomi 15 全系</span><span class="hot">Xiaomi 17 全系</span>
+                    </div>
+                </article>
+                <article class="dev-group reveal" data-cursor="hover">
+                    <header class="dev-head"><i data-lucide="cpu" class="ic"></i><h3>Redmi K 系列</h3></header>
+                    <div class="dev-chips">
+                        <span>K50 至尊版</span><span>K50 Gaming</span><span>K60</span><span>K60 Pro</span>
+                        <span>K70</span><span>K70 Pro</span><span class="hot">K80 全系</span><span class="hot">K90 全系</span>
+                    </div>
+                </article>
+                <article class="dev-group reveal" data-cursor="hover">
+                    <header class="dev-head"><i data-lucide="tablet" class="ic"></i><h3>Xiaomi Pad</h3></header>
+                    <div class="dev-chips"><span>Xiaomi Pad 8 Pro</span></div>
+                </article>
+                <article class="dev-group reveal" data-cursor="hover">
+                    <header class="dev-head"><i data-lucide="notebook-pen" class="ic"></i><h3>Redmi Note</h3></header>
+                    <div class="dev-chips"><span>Note 12 Turbo</span></div>
+                </article>
+                <article class="dev-group dev-group--note reveal">
+                    <header class="dev-head"><i data-lucide="info" class="ic"></i><h3>没找到你的机型?</h3></header>
+                    <p class="dev-unk">不同机型适配情况不同,先加群或加 QQ 咨询,别急着付款。</p>
+                </article>
+            </div>
+
+            <!-- 一加 · 第三方移植(独立分组) -->
+            <div class="port reveal">
+                <div class="port-head">
+                    <div class="port-title">
+                        <i data-lucide="shuffle" class="ic"></i>
+                        <h3>一加 · 第三方移植</h3>
+                    </div>
+                    <p class="port-lede">
+                        一加的硬件,配上别家的魂。厌倦了 ColorOS 的臃肿?
+                        那就把 HyperOS 的流畅、Flyme 的干净,刷进你的一加里。
+                        第三方移植,玩的就是这个跳出厂商边界的劲儿。
+                    </p>
+                </div>
+                <div class="port-grid">
+                    <div class="port-card" data-cursor="hover">
+                        <div class="port-card-top">
+                            <i data-lucide="layers" class="port-ic"></i>
+                            <span class="port-badge port-badge--on">在维护</span>
+                        </div>
+                        <h4>HyperOS 移植</h4>
+                        <p>把澎湃的动画与互联生态搬进一加,流畅度直接拉满,适合追求丝滑体验的你。</p>
+                        <div class="port-dev"><span>一加 Ace 5</span><span>一加 13T</span></div>
+                    </div>
+                    <div class="port-card" data-cursor="hover">
+                        <div class="port-card-top">
+                            <i data-lucide="feather" class="port-ic"></i>
+                            <span class="port-badge port-badge--on">在维护</span>
+                        </div>
+                        <h4>Flyme 移植</h4>
+                        <p>魅族那套极简干净的交互,配上小窗与细节动效,给一加换一身清爽的皮。</p>
+                        <div class="port-dev"><span>一加 Ace 5</span><span>一加 13T</span></div>
+                    </div>
+                    <div class="port-card port-card--soon" data-cursor="hover">
+                        <div class="port-card-top">
+                            <i data-lucide="sparkles" class="port-ic"></i>
+                            <span class="port-badge port-badge--soon">规划中</span>
+                        </div>
+                        <h4>OriginOS 移植</h4>
+                        <p>蓝厂的原子组件与影像算法也在路上,适配完成后会第一时间在群里通知。</p>
+                        <div class="port-dev"><span>敬请期待</span></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上车流程 -->
+            <div class="join">
+                <h3 class="join-title reveal"><i data-lucide="log-in" class="ic"></i>如何上车</h3>
+
+                <div class="join-grid">
+                    <div class="join-groups reveal">
+                        <p class="join-label"><i data-lucide="users" class="ic"></i>快捷入群通道</p>
+
+                        <a class="gq" href="https://qm.qq.com/q/XqO6nD7Icg" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">Redmi K 系列</span>
+                            <span class="gq-act">加入交流群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/Z6ieuJzgAg" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">Redmi Note 12 Turbo</span>
+                            <span class="gq-act">加入交流群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/9VQOe0204U" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">小米 11 系列</span>
+                            <span class="gq-act">加入交流群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/65c1iqrMRi" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">小米 12 系列</span>
+                            <span class="gq-act">加入交流群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/kCKCjhXlAs" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">小米 14 / 15 / 17 · K70 Pro / K80 / K90</span>
+                            <span class="gq-act">HF-Mi ① 群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/3q98veyOog" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">小米 14 / 15 / 17 · K70 Pro / K80 / K90</span>
+                            <span class="gq-act">HF-Mi ③ 群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/VWVLmWTueY" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">小米 14 / 15 / 17 · K70 Pro / K80 / K90</span>
+                            <span class="gq-act">HF-Mi ② 群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                        <a class="gq" href="https://qm.qq.com/q/9wRVOMOrOo" target="_blank" rel="noreferrer" data-cursor="hover">
+                            <span class="gq-name">一加 Ace 5 / 一加 13T · 1035400025</span>
+                            <span class="gq-act">OPlus ① 群<i data-lucide="chevron-right" class="ic"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="join-steps reveal">
+                        <p class="join-label"><i data-lucide="list-ordered" class="ic"></i>三步走</p>
+                        <ol class="steps">
+                            <li><span class="step-n">1</span><p>加入上方对应的机型交流群,点击即可跳转。</p></li>
+                            <li><span class="step-n">2</span><p>仔细阅读群公告,收款码就在群公告里。</p></li>
+                            <li><span class="step-n">3</span><p>付款后私信 QQ <b class="mono">2727901961</b>,备注机型。</p></li>
+                        </ol>
+                        <div class="warn-box" role="note">
+                            <i data-lucide="alert-triangle" class="ic"></i>
+                            <p>只回已付款的兄弟,没付款的就不一一回复了,忙不过来,见谅。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ 05 · FAQ ═══════════ -->
+        <section class="faq" id="faq">
+            <div class="sec-head reveal">
+                <span class="sec-num">04</span>
+                <span class="sec-tag">Q&amp;A — 常见问题</span>
+            </div>
+
+            <h2 class="sec-title reveal"><span data-split>先问清楚,再上车</span></h2>
+
+            <div class="faq-list">
+                <details class="faq-item reveal" data-cursor="hover">
+                    <summary><span class="faq-q">入群后能退款吗?</span><i data-lucide="plus" class="faq-ic"></i></summary>
+                    <div class="faq-a"><p>虚拟商品,入群后不支持退款。想清楚了再上车,别冲动消费。</p></div>
+                </details>
+                <details class="faq-item reveal" data-cursor="hover">
+                    <summary><span class="faq-q">ROM 适配哪些机型?</span><i data-lucide="plus" class="faq-ic"></i></summary>
+                    <div class="faq-a"><p>上方列出的都在适配范围。没列到的先咨询,不同机型情况不同,别硬刷。</p></div>
+                </details>
+                <details class="faq-item reveal" data-cursor="hover">
+                    <summary><span class="faq-q">纯小白能刷吗?</span><i data-lucide="plus" class="faq-ic"></i></summary>
+                    <div class="faq-a"><p>群里有详细教程,但建议有点基础再动手。刷机有风险,变砖需自负 —— 当然,真出问题群里也会尽量帮你救。</p></div>
+                </details>
+                <details class="faq-item reveal" data-cursor="hover">
+                    <summary><span class="faq-q">更新频率怎么样?</span><i data-lucide="plus" class="faq-ic"></i></summary>
+                    <div class="faq-a"><p>官方一更新,这边立刻跟进。用最新版,不等旧包。</p></div>
+                </details>
+                <details class="faq-item reveal" data-cursor="hover">
+                    <summary><span class="faq-q">具体怎么刷入?</span><i data-lucide="plus" class="faq-ic"></i></summary>
+                    <div class="faq-a"><p>内置一键刷入脚本,对新手友好,照着教程走基本无脑操作。</p></div>
+                </details>
+            </div>
+        </section>
+
+        <!-- ═══════════ EOF · 页脚 ═══════════ -->
+        <footer class="site-foot">
+            <div class="foot-big reveal" aria-hidden="true">
+                <span data-split>感谢访问</span>
+            </div>
+            <div class="foot-row reveal">
+                <span class="foot-line">&gt; session.end() <span class="caret">_</span></span>
+                <span class="foot-copy">© 2022 — 2026 · HANFY · 随便看看就好</span>
+            </div>
+            <a class="foot-top" href="#top" data-cursor="hover" aria-label="回到顶部">
+                <i data-lucide="arrow-up" class="ic"></i>
+            </a>
+        </footer>
+
+    </main>
+
+    <!-- ═══════════ 悬浮音乐播放器 ═══════════ -->
+    <div class="player" id="player">
+        <button class="player-disc" id="player-toggle" data-cursor="hover" aria-label="播放 / 暂停">
+            <i data-lucide="disc-3" class="player-vinyl" id="player-vinyl"></i>
+            <i data-lucide="play" class="player-state ic-play" id="ic-play"></i>
+            <i data-lucide="pause" class="player-state ic-pause" id="ic-pause" style="display:none"></i>
+        </button>
+        <div class="player-meta">
+            <span class="player-title">背景音乐</span>
+            <span class="player-sub" id="player-status">待播放</span>
+        </div>
+        <div class="player-eq" id="player-eq" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+        </div>
+        <audio id="bg-music" loop preload="none">
+            <source src="https://music.163.com/song/media/outer/url?id=1436709403.mp3" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <script src="script.js?v=20260725-1"></script>
+</body>
+</html>
